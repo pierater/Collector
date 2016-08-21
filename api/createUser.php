@@ -5,11 +5,11 @@ $lastName = POST["lastName"];
 $email = POST["email"];
 $bio = POST["bio"];
 
-$sql = "INSERT INTO users (firstname, lastname, email, bio) VALUES ($firstName, $lastName, $email, $bio)";
+$sql = "INSERT INTO `users` (`firstName`, `lastName`, `email`, `bio`) VALUES ('$firstName', '$lastName', '$email', '$bio')";
 
 $query = $conn->query($sql);
 
-$sql = "SELECT id FROM users WHERE firstName = $firstName, lastName = $lastName, email = $email, bio = $bio";
+$sql = "SELECT `id` FROM `users` WHERE `firstName` = '$firstName' AND `lastName` = '$lastName' AND `email` = '$email' AND `bio` = '$bio'";
 
 $query = $conn->query($sql);
 
