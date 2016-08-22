@@ -1,12 +1,7 @@
 <?php
 include "../serverConnect/dbConnect.php";
-$id = POST["id"];
 
-try {
-$sql = "DELETE FROM users WHERE id = $id";
-} catch(exception e) {
-    print_r(json_encode(e->getMessage()));
-}
-
+$id = $_GET["id"];
+$sql = "DELETE FROM `users` WHERE `id` = '$id'";
 $query = $conn->query($sql);
 ?>
