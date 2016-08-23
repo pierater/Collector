@@ -6,17 +6,25 @@ $email = $_GET["email"];
 $bio = $_GET["bio"];
 $lon = $_GET["lon"];
 $lat = $_GET["lat"];
+if(isUser($id)
+{
+	print_r(json_encode(array("error" => "true"));
+}
+else
+{
+	$token = sha1(uniqid(rand(), true));
+	$sql = "INSERT INTO `users` (`firstName`, `lastName`, `email`, `bio`, `token`) VALUES ('$firstName', '$lastName', '$email', '$bio', '$token')";
+	$query = $conn->query($sql);
 
-$sql = "INSERT INTO `users` (`firstName`, `lastName`, `email`, `bio`) VALUES ('$firstName', '$lastName', '$email', '$bio')";
-$query = $conn->query($sql);
+	$sql = "SELECT `id`, `token` FROM `users` WHERE `firstName` = '$firstName' AND `lastName` = '$lastName' AND `email` = '$email' AND `bio` = '$bio'";
 
-$sql = "SELECT `id` FROM `users` WHERE `firstName` = '$firstName' AND `lastName` = '$lastName' AND `email` = '$email' AND `bio` = '$bio'";
-
-$query = $conn->query($sql);
-$query->setFetchMode(PDO::FETCH_ASSOC);
-$output = $query->fetch();
-$id = $output["id"];
-$sql = "INSERT INTO `userLocations` (`id`, `lat`, `lon`) VALUES ('$id', '$lat', '$lon')";
-$query = $conn->query($sql);
-print_r(json_encode($output));
+	$query = $conn->query($sql);
+	$query->setFetchMode(PDO::FETCH_ASSOC);
+	$output = $query->fetch();
+	$id = $output["id"];
+	$token = $output["token"];
+	$sql = "INSERT INTO `userLocations` (`id`, `lat`, `lon`) VALUES ('$id', '$lat', '$lon')";
+	$query = $conn->query($sql);
+	print_r(json_encode($output));
+}
 ?>

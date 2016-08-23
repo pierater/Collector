@@ -1,0 +1,3 @@
+import "notifierServer"
+
+serv = NotifierServer()
